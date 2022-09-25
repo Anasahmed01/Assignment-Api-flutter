@@ -26,7 +26,11 @@ class _HomeappState extends State<Homeapp> {
                           subtitle:
                               Text('${snapshot.data.data[index].username}'),
                           leading: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  deleteUser();
+                                });
+                              },
                               icon: const Icon(Icons.delete_outline_rounded)),
                         );
                       });

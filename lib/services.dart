@@ -9,9 +9,9 @@ getuser() async {
   return HomeModel.fromJson(responseData);
 }
 
-deleteUser({required int id}) {
-  return http.post(
-    Uri.parse('https://maaz-api.tga-edu.com/api/users/$id'),
+deleteUser() {
+  return http.delete(
+    Uri.parse('https://maaz-api.tga-edu.com/api/users'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
