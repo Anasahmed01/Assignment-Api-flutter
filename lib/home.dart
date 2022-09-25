@@ -1,6 +1,5 @@
+import 'package:assignmentapi/services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class Homeapp extends StatefulWidget {
   const Homeapp({super.key});
@@ -12,6 +11,29 @@ class Homeapp extends StatefulWidget {
 class _HomeappState extends State<Homeapp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder(
+                future: getuser(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  return ListView.builder(
+                      itemCount: snapshot.data.data.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text('${snapshot.data.data[index].name}'),
+                          subtitle:
+                              Text('${snapshot.data.data[index].username}'),
+                          leading: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.delete_outline_rounded)),
+                        );
+                      });
+                }),
+          ),
+        ],
+      ),
+    );
   }
 }
