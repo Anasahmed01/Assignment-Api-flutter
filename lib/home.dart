@@ -14,6 +14,13 @@ class _HomeappState extends State<Homeapp> {
   TextEditingController name = TextEditingController();
   TextEditingController username = TextEditingController();
   TextEditingController email = TextEditingController();
+  clear() {
+    setState(() {
+      name.clear();
+      username.clear();
+      email.clear();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,7 @@ class _HomeappState extends State<Homeapp> {
             TextField(
               decoration: InputDecoration(
                   hintText: 'Enter Name',
-                  hintStyle: const TextStyle(color: Colors.white),
+                  hintStyle: const TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
@@ -36,7 +43,7 @@ class _HomeappState extends State<Homeapp> {
             TextField(
               decoration: InputDecoration(
                   hintText: 'Enter Email',
-                  hintStyle: const TextStyle(color: Colors.white),
+                  hintStyle: const TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
@@ -48,7 +55,7 @@ class _HomeappState extends State<Homeapp> {
             TextField(
               decoration: InputDecoration(
                   hintText: 'Enter Username',
-                  hintStyle: const TextStyle(color: Colors.white),
+                  hintStyle: const TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
@@ -75,6 +82,7 @@ class _HomeappState extends State<Homeapp> {
                       username: username.text,
                       email: email.text),
                 );
+                clear();
               },
               child: const Text(
                 'Add',
