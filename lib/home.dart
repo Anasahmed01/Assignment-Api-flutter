@@ -22,6 +22,35 @@ class _HomeappState extends State<Homeapp> {
     });
   }
 
+  Widget alertdialog({required function}) {
+    return AlertDialog(
+      title: const Text('Update List'),
+      content: Column(
+        children: [
+          TextField(
+            controller: name,
+            decoration: const InputDecoration(hintText: "Enter Name"),
+          ),
+          TextField(
+            controller: username,
+            decoration: const InputDecoration(hintText: "Enter Username"),
+          ),
+          TextField(
+            controller: email,
+            decoration: const InputDecoration(hintText: "Enter Email"),
+          ),
+        ],
+      ),
+      actions: [
+        ElevatedButton(
+            onPressed: () {
+              function;
+            },
+            child: const Text('Add'))
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

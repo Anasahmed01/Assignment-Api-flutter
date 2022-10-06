@@ -28,7 +28,7 @@ addUser(Data model) async {
   );
 }
 
-updateUser({required Data model, required int id}) async {
+updateUser({required Data model, required id}) async {
   await http.put(
     Uri.parse("https://maaz-api.tga-edu.com/api/users/$id"),
     headers: <String, String>{
