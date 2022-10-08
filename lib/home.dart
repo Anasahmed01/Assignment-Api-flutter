@@ -185,9 +185,16 @@ class _HomeappState extends State<Homeapp> {
                                         IconButton(
                                             onPressed: () {
                                               setState(() {
-                                                deleteUser(
-                                                    id: snapshot
-                                                        .data.data[index].id);
+                                                alertdialog(
+                                                    function: updateUser(
+                                                        id: snapshot.data
+                                                            .data[index].id,
+                                                        model: Data(
+                                                            name: name.text,
+                                                            username:
+                                                                username.text,
+                                                            email:
+                                                                email.text)));
                                               });
                                             },
                                             icon: const Icon(
