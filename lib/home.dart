@@ -54,163 +54,171 @@ class _HomeappState extends State<Homeapp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'Enter Name',
-                      hintStyle: const TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      fillColor: const Color(0xFF343645),
-                      filled: true),
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255)),
-                  controller: name,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'Enter Username',
-                      hintStyle: const TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      fillColor: const Color(0xFF343645),
-                      filled: true),
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255)),
-                  controller: username,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'Enter Email',
-                      hintStyle: const TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      fillColor: const Color(0xFF343645),
-                      filled: true),
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255)),
-                  controller: email,
-                ),
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    const Color(0xFF343645),
-                  ),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40.0),
-                    ),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: [0.1, 0.5, 0.7, 0.9],
+              colors: [
+                Color.fromARGB(255, 11, 3, 29),
+                Color.fromARGB(255, 52, 27, 111),
+                Color.fromARGB(255, 52, 27, 111),
+                Color.fromARGB(255, 11, 3, 29),
+              ],
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        hintText: 'Enter Name',
+                        hintStyle: const TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        fillColor: Colors.transparent,
+                        filled: true),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                    controller: name,
                   ),
                 ),
-                onPressed: () {
-                  addUser(
-                    Data(
-                        name: name.text,
-                        username: username.text,
-                        email: email.text),
-                  );
-                  clear();
-                },
-                child: const Text(
-                  'Add',
-                  style: TextStyle(fontSize: 20),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        hintText: 'Enter Username',
+                        hintStyle: const TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        fillColor: Colors.transparent,
+                        filled: true),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                    controller: username,
+                  ),
                 ),
-              ),
-              Expanded(
-                child: FutureBuilder(
-                    future: getuser(),
-                    builder: (context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) {
-                        return ListView.builder(
-                            itemCount: snapshot.data.data.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 4.0),
-                                child: ListTile(
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5.0),
-                                      topRight: Radius.circular(40),
-                                      bottomRight: Radius.circular(5.0),
-                                      bottomLeft: Radius.circular(25),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        hintText: 'Enter Email',
+                        hintStyle: const TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        fillColor: Colors.transparent,
+                        filled: true),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                    controller: email,
+                  ),
+                ),
+                FloatingActionButton(
+                  onPressed: () {
+                    setState(() {
+                      addUser(
+                        Data(
+                            name: name.text,
+                            username: username.text,
+                            email: email.text),
+                      );
+                      clear();
+                    });
+                  },
+                  backgroundColor: Colors.green,
+                  child: const Icon(Icons.add),
+                ),
+                Expanded(
+                  child: FutureBuilder(
+                      future: getuser(),
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              itemCount: snapshot.data.data.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: ListTile(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(5.0),
+                                        topRight: Radius.circular(40),
+                                        bottomRight: Radius.circular(5.0),
+                                        bottomLeft: Radius.circular(25),
+                                      ),
                                     ),
-                                  ),
-                                  tileColor: Colors.grey,
-                                  title:
-                                      Text('${snapshot.data.data[index].name}'),
-                                  subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                          '${snapshot.data.data[index].username}'),
-                                      Text(
-                                          '${snapshot.data.data[index].email}'),
-                                    ],
-                                  ),
-                                  trailing: FittedBox(
-                                    fit: BoxFit.fill,
-                                    child: Row(
+                                    tileColor: Colors.grey,
+                                    title: Text(
+                                        '${snapshot.data.data[index].name}'),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                updateUser(
-                                                    model: Data(
-                                                        name: name.text,
-                                                        email: email.text,
-                                                        username:
-                                                            username.text),
-                                                    id: snapshot
-                                                        .data.data[index].id);
-                                              });
-                                            },
-                                            icon: const Icon(Icons.edit)),
-                                        IconButton(
+                                        Text(
+                                            '${snapshot.data.data[index].username}'),
+                                        Text(
+                                            '${snapshot.data.data[index].email}'),
+                                      ],
+                                    ),
+                                    trailing: FittedBox(
+                                      fit: BoxFit.fill,
+                                      child: Row(
+                                        children: [
+                                          IconButton(
                                             onPressed: () {
                                               setState(() {
                                                 alertdialog(
-                                                    function: updateUser(
-                                                        id: snapshot.data
-                                                            .data[index].id,
-                                                        model: Data(
-                                                            name: name.text,
-                                                            username:
-                                                                username.text,
-                                                            email:
-                                                                email.text)));
+                                                  function: updateUser(
+                                                      model: Data(
+                                                          name: name.text,
+                                                          email: email.text,
+                                                          username:
+                                                              username.text),
+                                                      id: snapshot
+                                                          .data.data[index].id),
+                                                );
+                                              });
+                                            },
+                                            icon: const Icon(Icons.edit),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                deleteUser(
+                                                  id: snapshot
+                                                      .data.data[index].id,
+                                                );
                                               });
                                             },
                                             icon: const Icon(
-                                                Icons.delete_outline_rounded)),
-                                      ],
+                                                Icons.delete_outline_rounded),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            });
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    }),
-              ),
-            ],
+                                );
+                              });
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                      }),
+                ),
+              ],
+            ),
           ),
         ),
       ),
