@@ -74,6 +74,77 @@ class _HomeappState extends State<Homeapp> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
+                Expanded(
+                  child: FutureBuilder(
+                      future: getuser(),
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              itemCount: snapshot.data.data.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: ListTile(
+                                    textColor: const Color.fromARGB(
+                                        255, 255, 255, 255),
+                                    iconColor: Colors.white,
+                                    title: Text(
+                                        '${snapshot.data.data[index].name}'),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            '${snapshot.data.data[index].username}'),
+                                        Text(
+                                            '${snapshot.data.data[index].email}'),
+                                      ],
+                                    ),
+                                    trailing: FittedBox(
+                                      fit: BoxFit.fill,
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                alertdialog(
+                                                  function: updateUser(
+                                                      model: Data(
+                                                          name: name.text,
+                                                          email: email.text,
+                                                          username:
+                                                              username.text),
+                                                      id: snapshot
+                                                          .data.data[index].id),
+                                                );
+                                              });
+                                            },
+                                            icon: const Icon(Icons.edit),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                deleteUser(
+                                                  id: snapshot
+                                                      .data.data[index].id,
+                                                );
+                                              });
+                                            },
+                                            icon: const Icon(
+                                                Icons.delete_outline_rounded),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              });
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                      }),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: TextField(
@@ -125,7 +196,17 @@ class _HomeappState extends State<Homeapp> {
                     controller: email,
                   ),
                 ),
-                FloatingActionButton(
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 37, 27, 147),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40.0),
+                      ),
+                    ),
+                  ),
                   onPressed: () {
                     setState(() {
                       addUser(
@@ -137,89 +218,10 @@ class _HomeappState extends State<Homeapp> {
                       clear();
                     });
                   },
-                  backgroundColor: Colors.green,
-                  child: const Icon(Icons.add),
-                ),
-                Expanded(
-                  child: FutureBuilder(
-                      future: getuser(),
-                      builder: (context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          return ListView.builder(
-                              itemCount: snapshot.data.data.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(top: 4.0),
-                                  child: ListTileTheme(
-                                    textColor: Colors.white,
-                                    iconColor: Colors.white,
-                                    child: ListTile(
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(5.0),
-                                          topRight: Radius.circular(40),
-                                          bottomRight: Radius.circular(5.0),
-                                          bottomLeft: Radius.circular(25),
-                                        ),
-                                      ),
-                                      tileColor: Colors.grey,
-                                      title: Text(
-                                          '${snapshot.data.data[index].name}'),
-                                      subtitle: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                              '${snapshot.data.data[index].username}'),
-                                          Text(
-                                              '${snapshot.data.data[index].email}'),
-                                        ],
-                                      ),
-                                      trailing: FittedBox(
-                                        fit: BoxFit.fill,
-                                        child: Row(
-                                          children: [
-                                            IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  alertdialog(
-                                                    function: updateUser(
-                                                        model: Data(
-                                                            name: name.text,
-                                                            email: email.text,
-                                                            username:
-                                                                username.text),
-                                                        id: snapshot.data
-                                                            .data[index].id),
-                                                  );
-                                                });
-                                              },
-                                              icon: const Icon(Icons.edit),
-                                            ),
-                                            IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  deleteUser(
-                                                    id: snapshot
-                                                        .data.data[index].id,
-                                                  );
-                                                });
-                                              },
-                                              icon: const Icon(
-                                                  Icons.delete_outline_rounded),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              });
-                        } else {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
-                      }),
+                  child: const Text(
+                    'Add',
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
               ],
             ),
