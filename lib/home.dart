@@ -150,62 +150,66 @@ class _HomeappState extends State<Homeapp> {
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(top: 4.0),
-                                  child: ListTile(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5.0),
-                                        topRight: Radius.circular(40),
-                                        bottomRight: Radius.circular(5.0),
-                                        bottomLeft: Radius.circular(25),
+                                  child: ListTileTheme(
+                                    textColor: Colors.white,
+                                    iconColor: Colors.white,
+                                    child: ListTile(
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(5.0),
+                                          topRight: Radius.circular(40),
+                                          bottomRight: Radius.circular(5.0),
+                                          bottomLeft: Radius.circular(25),
+                                        ),
                                       ),
-                                    ),
-                                    tileColor: Colors.grey,
-                                    title: Text(
-                                        '${snapshot.data.data[index].name}'),
-                                    subtitle: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                            '${snapshot.data.data[index].username}'),
-                                        Text(
-                                            '${snapshot.data.data[index].email}'),
-                                      ],
-                                    ),
-                                    trailing: FittedBox(
-                                      fit: BoxFit.fill,
-                                      child: Row(
+                                      tileColor: Colors.grey,
+                                      title: Text(
+                                          '${snapshot.data.data[index].name}'),
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                alertdialog(
-                                                  function: updateUser(
-                                                      model: Data(
-                                                          name: name.text,
-                                                          email: email.text,
-                                                          username:
-                                                              username.text),
-                                                      id: snapshot
-                                                          .data.data[index].id),
-                                                );
-                                              });
-                                            },
-                                            icon: const Icon(Icons.edit),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                deleteUser(
-                                                  id: snapshot
-                                                      .data.data[index].id,
-                                                );
-                                              });
-                                            },
-                                            icon: const Icon(
-                                                Icons.delete_outline_rounded),
-                                          ),
+                                          Text(
+                                              '${snapshot.data.data[index].username}'),
+                                          Text(
+                                              '${snapshot.data.data[index].email}'),
                                         ],
+                                      ),
+                                      trailing: FittedBox(
+                                        fit: BoxFit.fill,
+                                        child: Row(
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  alertdialog(
+                                                    function: updateUser(
+                                                        model: Data(
+                                                            name: name.text,
+                                                            email: email.text,
+                                                            username:
+                                                                username.text),
+                                                        id: snapshot.data
+                                                            .data[index].id),
+                                                  );
+                                                });
+                                              },
+                                              icon: const Icon(Icons.edit),
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  deleteUser(
+                                                    id: snapshot
+                                                        .data.data[index].id,
+                                                  );
+                                                });
+                                              },
+                                              icon: const Icon(
+                                                  Icons.delete_outline_rounded),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
