@@ -153,7 +153,7 @@ class _HomeappState extends State<Homeapp> {
                         hintStyle: const TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255)),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(5.0),
                         ),
                         fillColor: Colors.transparent,
                         filled: true),
@@ -170,7 +170,7 @@ class _HomeappState extends State<Homeapp> {
                         hintStyle: const TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255)),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(5.0),
                         ),
                         fillColor: Colors.transparent,
                         filled: true),
@@ -187,7 +187,7 @@ class _HomeappState extends State<Homeapp> {
                         hintStyle: const TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255)),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(5.0),
                         ),
                         fillColor: Colors.transparent,
                         filled: true),
